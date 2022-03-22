@@ -1,0 +1,90 @@
+/* Name: Harsh Singh
+Roll No: 1262
+Unit: 3
+Program: Balancing of Paranthesis */
+#include<iostream>
+#define MAX 10
+using namespace std;
+/*Stack template*/
+class Stack{
+	char A[MAX];
+	int tos;
+	public:
+		Stack(){
+			tos=-1;
+		}
+		void Push(char x);
+		char Pop();
+		int Full();
+		int Empty();
+};
+int Stack::Full(){
+	return(tos==MAX-1 ? 1:0);
+}
+int Stack::Empty(){
+	return(tos==-1 ? 1:0);
+}
+void Stack::Push(char x){
+	if(Full()){
+		cout<<"Overflow!";
+	}
+	else{
+		tos++;
+		A[tos]=x;
+	}
+}
+char Stack::Pop(){
+	if(Empty()){
+		cout<<"Underflow!";
+		return -1;
+	}
+	else{
+		char t=A[tos];
+		tos--;
+		return t;
+	}
+}
+int main(){
+	Stack s;
+	char expr[20],tmp;
+	int i,flag=0;
+	cout<<"********Balancing of Paranthesis********";
+	cout<<"\nEnter an expression: ";
+	cin>>expr;
+	i=0;
+	while(expr[i]!='\0'){
+		//checking for open bracket
+		if(expr[i]=='[' || expr[i]=='{' || expr[i]=='('){
+			s.Push(expr[i]);
+		}
+		//checking for close bracket
+		if(expr[i]==']' || expr[i]=='}' || expr[i]==')'){
+			if(s.Empty()){
+				flag=1;
+				break;
+			}
+			tmp=s.Pop();
+			
+			if	(	(expr[i]==']' && tmp=='[') ||
+					(expr[i]=='}' && tmp=='{') ||
+					(expr[i]==')' && tmp=='(')	
+				)
+			{
+				i++;
+				continue;		
+			}
+			else{//open and close bracket do not match
+				flag=1;
+				break;
+			}
+		}//end of if close bracket
+		i++;
+	}//end of while
+	if(s.Empty() && flag==0){
+		cout<<"Paranthesis are balanced";
+	}
+	else{
+		cout<<"Paranthesis are not balanced";
+	}
+	
+}//end of main

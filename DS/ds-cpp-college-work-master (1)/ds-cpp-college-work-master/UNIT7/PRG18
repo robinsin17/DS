@@ -1,0 +1,103 @@
+/* name: Harsh Singh
+Roll No: 1262
+Unit: 7
+Program: Adjacency matrix */
+#include<iostream>
+#include<conio.h>
+
+#define MAX 10
+
+using namespace std;
+
+/*2.Graph Template*/
+class Graph
+{
+	int adj[MAX][MAX];
+	int nodes;
+	int edges;
+	
+	public:
+		Graph()
+		{
+			for(int i=0; i<MAX ;i++)
+			{
+				for(int j=0; j<MAX; j++)
+				{
+					adj[i][j]=0;
+				}
+			}
+			nodes=0;
+			edges=0;
+		}
+		void CreateGraph();
+		void DisplayGraph();
+};
+void Graph::CreateGraph()
+{
+	int i,origin,destination;
+	
+	cout<<"Enter the number of nodes:";
+	cin>>nodes;
+	
+	cout<<"Enter the number of edges";
+	cin>>edges;
+	
+	for(i=1;i<=edges;i++)
+	{
+		cout<<"Enter edge"<<i<<endl;
+		cout<<"Enter source:";
+		cin>>origin;
+		cout<<"Enter the destination";
+		cin>>destination;
+		
+		adj[origin][destination]=1;
+		adj[destination][origin]=1;
+	}
+		
+}//END OF CREATE_GRAPH
+void Graph::DisplayGraph(){
+	int i,j;
+	for(i=0;i<nodes;i++){
+		for(j=0;j<nodes;j++){
+			cout<<adj[i][j]<<" ";
+		}
+		cout<<endl;
+	}
+}
+int main()
+{
+	Graph g;
+	int ch;
+	while(1) 
+	{
+		system ("cls");
+		cout << "***Adjacency Graph***" <<endl << endl;
+		cout << "1. Create" << endl;
+		cout << "2. Display" << endl;                                          
+		cout << "3. Exit" << endl <<endl;
+	
+		cout << "Enter your choice: ";
+		cin >> ch;
+	
+	
+			switch(ch) 
+			{
+				case 1:
+					g.CreateGraph();
+					getch();
+					break;
+			
+				case 2:
+					g.DisplayGraph();
+					getch();
+					break;
+			
+				case 3:
+					exit(1);
+			
+				default:
+					cout << "Incorrect Choice!!";
+					getch();
+			} //end of switch
+	} //end of while
+} //end of 
